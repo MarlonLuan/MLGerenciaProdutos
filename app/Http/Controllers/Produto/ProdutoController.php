@@ -55,7 +55,11 @@ class ProdutoController extends Controller
 
     public function show($id)
     {
-        return View('produto.show');
+        $title = self::title . ' - Detalhes';
+        $produto = $this->produto->find($id);
+        $title .= " -  $produto->nome";
+
+        return View('produto.show', compact('title', 'produto'));
     }
 
     public function edit($id)
