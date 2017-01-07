@@ -30,7 +30,10 @@ class ProdutoController extends Controller
 
     public function create()
     {
-        return View('produto.create_edit');
+        $title = self::title . ' - Cadastro';
+        $categorias = ['alimentos', 'eletronicos', 'limpeza', 'moveis'];
+
+        return View('produto.create_edit', compact('title', 'categorias'));
     }
 
     public function store(Request $request)
