@@ -60,7 +60,13 @@ class ProdutoController extends Controller
 
     public function edit($id)
     {
-        return View('produto.create_edit');
+        $title = self::title . ' - Editar';
+        $categorias = ['alimentos', 'eletronicos', 'limpeza', 'moveis'];
+
+        $produto = $this->produto->find($id);
+        $title .= " -  $produto->nome";
+
+        return View('produto.create_edit', compact('title', 'categorias', 'produto'));
     }
 
     public function update(Request $request, $id)
