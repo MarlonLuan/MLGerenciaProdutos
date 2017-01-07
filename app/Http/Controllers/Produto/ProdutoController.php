@@ -6,11 +6,26 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Produto;
+
 class ProdutoController extends Controller
 {
+    const title = 'Produto';
+
+    protected $produto;
+
+    public function __construct(Produto $_model)
+    {
+        $this->produto = $_model;
+    }
+
     public function index()
     {
-        return View('produto.index');
+        $title = self::title;
+
+        $produtos = $this->produto->all();
+
+        return View('produto.index', compact('title', 'produtos'));
     }
 
     public function create()
