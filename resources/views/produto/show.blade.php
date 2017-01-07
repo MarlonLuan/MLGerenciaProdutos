@@ -23,4 +23,12 @@
     <p><b>Categoria:</b> {{ $produto->categoria }} </p>
     <p><b>Descrição:</b> {{ $produto->descricao }} </p>
 
+    <hr>
+
+    {!! Form::open(['route'=> ['produto.destroy',$produto->id ], 'class'=>'form', 'method'=>'delete'] ) !!}
+
+    {!! Form::submit('Excluir produto', ['class'=>'btn btn-danger']) !!}
+
+    {!! Form::close() !!}
+
 @endsection

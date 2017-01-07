@@ -93,6 +93,17 @@ class ProdutoController extends Controller
 
     public function destroy($id)
     {
-        return View('produto.index');
+        $title = self::title . ' - Excluir';
+        $produto = $this->produto->find($id);
+        $title .= " - $produto->nome";
+
+        $delete = $produto->delete();
+
+        if ($delete) {
+            return redirect()->route('produto.index');
+
+        } else {
+            return redirect()->back();
+        }
     }
 }
