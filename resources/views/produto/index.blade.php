@@ -44,4 +44,7 @@
         </table>
 
     </div>
+
+    {{ $produtos->links() }}
+
 @endsection

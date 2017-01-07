@@ -12,6 +12,7 @@ use App\Models\Produto;
 class ProdutoController extends Controller
 {
     const title = 'Produto';
+    const itensPagina = 5;
 
     protected $produto;
 
@@ -24,7 +25,8 @@ class ProdutoController extends Controller
     {
         $title = self::title;
 
-        $produtos = $this->produto->all();
+        //$produtos = $this->produto->all();
+        $produtos = $this->produto->paginate(self::itensPagina);
 
         return View('produto.index', compact('title', 'produtos'));
     }
