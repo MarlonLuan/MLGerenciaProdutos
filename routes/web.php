@@ -1,5 +1,7 @@
 <?php
 
+Route::resource('produto', ucfirst('Produto\ProdutoController'));
+
 Route::group(['namespace' => ucfirst('Site')], function () {
     Route::get('contato', 'SiteController@contato')->name('site.contato');
     Route::get('sobre', 'SiteController@sobre')->name('site.sobre');
