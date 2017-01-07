@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Produto;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Produto\ProdutoFormRequest;
 
 use App\Models\Produto;
 
@@ -36,9 +37,20 @@ class ProdutoController extends Controller
         return View('produto.create_edit', compact('title', 'categorias'));
     }
 
-    public function store(Request $request)
+    public function store(ProdutoFormRequest $request)
     {
-        return View('produto.index');
+        //Pega todos dados do Form
+        $dataForm = $request->all();
+
+        $dataForm['ativo'] = !isset($dataForm['ativo']) ? 0 : 1;
+
+        $insert = $this->produto->create($dataForm);
+
+        if ($insert) {
+            return redirect()->route('produto.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function show($id)
