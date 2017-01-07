@@ -69,9 +69,22 @@ class ProdutoController extends Controller
         return View('produto.create_edit', compact('title', 'categorias', 'produto'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ProdutoFormRequest $request, $id)
     {
-        return View('produto.index');
+        $produto = $this->produto->find($id);
+
+        //Pega todos dados do Form
+        $dataForm = $request->all();
+
+        $dataForm['ativo'] = !isset($dataForm['ativo']) ? 0 : 1;
+
+        $update = $produto->update($dataForm);
+
+        if ($update) {
+            return redirect()->route('produto.index');
+        } else {
+            return redirect()->back();
+        }
     }
 
     public function destroy($id)
